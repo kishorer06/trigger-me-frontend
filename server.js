@@ -13,4 +13,4 @@ res.sendFile(path.join(__dirname+'/dist/trigger-me-frontend/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 3000);
