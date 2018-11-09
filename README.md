@@ -1,10 +1,10 @@
-# Trigger-Me written Angular6 and Bootstrap 4
+# Trigger-Me-Frontend-Frontend written Angular6 and Bootstrap 4
 
-Trigger-Me App built using Angular 6 and Bootstrap 4
+Trigger-Me-Frontend App built using Angular 6 and Bootstrap 4
 
 This project is a web application serves as a client and handles employee enrollments.
 
-## [Trigger-Me]()
+## [Trigger-Me-Frontend]()
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.  
 
@@ -16,7 +16,7 @@ In order to start the project use:
 
 ```bash
 $ git clone https://github.com/kishorer06/trigger_me.git
-$ cd ../trigger_me/trigger-me-client/
+$ cd ../trigger-me-frontend/
 # install the project's dependencies
 $ npm install
 # before running `npm start`, the host file should have www.trigger-me.com mapped with localhost.
