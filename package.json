@@ -4,6 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "node server.js",
+        "start-dev": "ng serve --host www.trigger-me.com --port 4200 --open",
         "build": "ng build --prod",
         "test": "ng test",
         "test-ci": "TEST_CI=true ng test",
@@ -57,7 +58,7 @@
         "typescript": "~2.9.2"
     },
     "engines": {
-      "node": "9.10.1",
-      "npm": "6.4.1"
+        "node": "9.10.1",
+        "npm": "6.4.1"
     }
 }

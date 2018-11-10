@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://www.trigger-me.com:8443/'
+    apiUrl: 'https://app-trigger-me-server.herokuapp.com/'
 };
