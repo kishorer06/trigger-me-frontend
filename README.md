@@ -4,7 +4,8 @@ Trigger-Me-Frontend App built using Angular 6 and Bootstrap 4
 
 This project is a web application serves as a client and handles employee enrollments.
 
-## [Trigger-Me-Frontend](https://app-trigger-me.herokuapp.com)
+## [Trigger-Me-Frontend]
+## [Live] (https://app-trigger-me.herokuapp.com)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.  
 
