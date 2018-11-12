@@ -4,6 +4,7 @@ export const ApiConstants = {
     getUser: 'tm/getUser',
     getEmployeeById: 'tm/getEmployeeById',
     saveEmployee: 'tm/saveEmployee',
-    updateEmployee: 'tm/updateEmployee',
     getEmployees: 'tm/getEmployees',
+    updateEmployee: 'tm/updateEmployee',
+    deleteEmployee: 'tm/deleteEmployee'
 };

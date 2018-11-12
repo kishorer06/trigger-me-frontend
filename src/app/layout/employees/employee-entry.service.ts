@@ -9,11 +9,23 @@ export class EmployeeEntryService {
     apiUrl = environment.apiUrl;
     constructor(private http: HttpClient) { }
 
-    saveEmployee(empl) {
-        return this.http.post(this.apiUrl + ApiConstants.saveEmployee, JSON.stringify(empl));
+    saveEmployeeService(emp) {
+        return this.http.post(this.apiUrl + ApiConstants.saveEmployee, this.getJsonStringify(emp));
     }
 
-    getEmployees() {
+    getEmployeesService() {
         return this.http.get(this.apiUrl + ApiConstants.getEmployees);
+    }
+
+    deleteEmpService(_empId) {
+        return this.http.delete(this.apiUrl + ApiConstants.deleteEmployee + "?empId=" + _empId);
+    }
+
+    editEmpService(emp) {
+        return this.http.patch(this.apiUrl + ApiConstants.updateEmployee, this.getJsonStringify(emp));
+    }
+
+    getJsonStringify(emp) {
+        return JSON.stringify(emp);
     }
 }

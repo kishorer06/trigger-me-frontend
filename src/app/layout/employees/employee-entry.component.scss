@@ -1,0 +1,11 @@
+.row-edit, .row-delete{
+  cursor: pointer;
+}
+
+.row-edit:hover{
+  color: #ff8100;
+}
+
+.row-delete:hover{
+color: red;
+}

@@ -57,7 +57,7 @@ export class EmployeeEntryComponent implements OnInit {
             this.employeeEntry.projectEndDate = this.formatDate(this.employeeEntryForm.controls.projectEndDate.value);
             this.employeeEntry.empStartDate = this.formatDate(this.employeeEntryForm.controls.empStartDate.value);
             this.employeeEntry.empEndDate = this.formatDate(this.employeeEntryForm.controls.empEndDate.value);
-            this.emplService.saveEmployee(this.employeeEntry).subscribe(res => {
+            this.emplService.saveEmployeeService(this.employeeEntry).subscribe(res => {
                 console.log('Saved Employee', res);
                 this.getEmployees();
             }, (_err: HttpErrorResponse) => {
@@ -68,7 +68,7 @@ export class EmployeeEntryComponent implements OnInit {
     }
 
     getEmployees() {
-        this.emplService.getEmployees().subscribe(res => {
+        this.emplService.getEmployeesService().subscribe(res => {
             this.employeeList = res;
         }, (_err: HttpErrorResponse) => {
 
@@ -83,5 +83,25 @@ export class EmployeeEntryComponent implements OnInit {
     onReset() {
         this.submitted = false;
         this.employeeEntryForm.reset();
+    }
+
+    onEmpEdit(_empEditRow) {
+        console.log("Edit empl row::::::", _empEditRow);
+        this.emplService.editEmpService(_empEditRow).subscribe(res => {
+            console.log("Successfully edited::::", res);
+
+        }, (_err: HttpErrorResponse) => {
+            console.error("Failed to edit::::", _err);
+        });
+    }
+
+    onEmpDelete(_empDelRow) {
+        console.log("Delete empl row::::::", _empDelRow);
+        this.emplService.deleteEmpService(_empDelRow.empId).subscribe(res => {
+            console.log("Successfully deleted::::", res);
+            this.getEmployees();
+        }, (_err: HttpErrorResponse) => {
+            console.error("Failed to delete::::", _err);
+        });
     }
 }

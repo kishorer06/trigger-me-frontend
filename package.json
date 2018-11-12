@@ -4,8 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "node server.js",
-        "start-dev": "ng serve --host www.trigger-me.com --port 4200 --open",
-        "build": "ng build --prod",
+        "start-dev": "npm cache clean --force && npm install && ng serve --host www.trigger-me.com --port 4200 --open",
         "test": "ng test",
         "test-ci": "TEST_CI=true ng test",
         "lint": "ng lint",
@@ -31,6 +30,7 @@
         "express": "^4.16.2",
         "font-awesome": "^4.7.0",
         "ng2-charts": "^1.6.0",
+        "node-sass": "^4.10.0",
         "rxjs": "^6.1.0",
         "rxjs-compat": "^6.3.3",
         "yarn": "^1.6.0",

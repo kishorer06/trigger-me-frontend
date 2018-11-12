@@ -12,11 +12,15 @@ import { AuthGuard, AuthService, UserService } from './shared';
 import { TokenInterceptor } from '../app/shared/interceptor';
 import { AppComponent } from './app.component';
 import { EmployeeEntryService } from './layout/employees/employee-entry.service';
+import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
+import { ErrorModalComponent } from './modals/error-modal/error-modal.component';
+import { ConfirmationModalComponent } from './modals/confirmation-modal/confirmation-modal.component';
+import { EditComponentModal } from './modals/edit-component-modal/edit-component-modal.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
     // for development
-    // return new TranslateHttpLoader(http, '/start-angular/SB-Admin-BS4-Angular-5/master/dist/assets/i18n/', '.json');
+    // return new TranslateHttpLoader(http, '../../dist/assets/i18n/', '.json');
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -36,7 +40,7 @@ export function createTranslateLoader(http: HttpClient) {
         HttpModule,
         AppRoutingModule
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, SuccessModalComponent, ErrorModalComponent, ConfirmationModalComponent, EditComponentModal],
     providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,

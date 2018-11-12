@@ -13,19 +13,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 **Note** that this seed project requires **node >=v9.10.1 and npm >=6**.
 
-In order to start the project use:
+In order to start the project locally, use:
 
 ```bash
 $ git clone https://github.com/kishorer06/trigger_me.git
 $ cd ../trigger-me-frontend/
 # install the project's dependencies
-$ npm install
-# before running `npm start`, the host file should have www.trigger-me.com mapped with localhost.
-# watches your files and uses livereload by default run `npm start` for a dev server. Navigate to `http://www.trigger-me.com:4200/`. The app will automatically reload if you change any of the source files.
-$ npm start
-# prod build, will output the production application in `dist`
-# the produced code can be deployed (rsynced) to a remote server
-$ npm run build
+# before run npm install,
+# before running `npm run start-dev`, remove 'postinstall' script in the package.json and also host file should have
+# www.trigger-me.com mapped with localhost. watches your files and uses livereload by default run `npm run start-dev` for a dev
+# server which bootstraps application dependencies and opens up automatically in the browser. If not then, navigate to
+# `http://www.trigger-me.com:4200/`. The app will automatically reload if you change any of the source files.
+$ npm run start-dev
 ```
 
 ### Code scaffolding
