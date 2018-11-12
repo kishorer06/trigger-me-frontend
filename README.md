@@ -19,7 +19,6 @@ In order to start the project locally, use:
 $ git clone https://github.com/kishorer06/trigger_me.git
 $ cd ../trigger-me-frontend/
 # install the project's dependencies
-# before run npm install,
 # before running `npm run start-dev`, remove 'postinstall' script in the package.json and also host file should have
 # www.trigger-me.com mapped with localhost. watches your files and uses livereload by default run `npm run start-dev` for a dev
 # server which bootstraps application dependencies and opens up automatically in the browser. If not then, navigate to
