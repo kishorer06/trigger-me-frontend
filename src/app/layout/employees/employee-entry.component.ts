@@ -20,11 +20,10 @@ export class EmployeeEntryComponent implements OnInit {
     constructor(private fb: FormBuilder, private emplService: EmployeeEntryService) { }
     employeeEntryForm: FormGroup;
     employeeEntry: Employee = new Employee();
-
     employeeList;
 
     submitted = false;
-
+    isSpinner = true;
     ngOnInit() {
         this.employeeEntryForm = this.fb.group({
             empFName: ['', [Validators.required, Validators.minLength(2)]],
@@ -69,6 +68,7 @@ export class EmployeeEntryComponent implements OnInit {
 
     getEmployees() {
         this.emplService.getEmployeesService().subscribe(res => {
+            this.isSpinner = false;
             this.employeeList = res;
         }, (_err: HttpErrorResponse) => {
 
@@ -88,20 +88,14 @@ export class EmployeeEntryComponent implements OnInit {
     onEmpEdit(_empEditRow) {
         console.log("Edit empl row::::::", _empEditRow);
         this.emplService.editEmpService(_empEditRow).subscribe(res => {
-            console.log("Successfully edited::::", res);
-
         }, (_err: HttpErrorResponse) => {
-            console.error("Failed to edit::::", _err);
         });
     }
 
     onEmpDelete(_empDelRow) {
-        console.log("Delete empl row::::::", _empDelRow);
         this.emplService.deleteEmpService(_empDelRow.empId).subscribe(res => {
-            console.log("Successfully deleted::::", res);
             this.getEmployees();
         }, (_err: HttpErrorResponse) => {
-            console.error("Failed to delete::::", _err);
         });
     }
 }

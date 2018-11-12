@@ -192,8 +192,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <div *ngIf="isSpinner" class="spinner">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
                             <tr *ngFor="let employee of employeeList; index as i">
-
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{employee.empFName}}</td>
                                 <td>{{employee.empLName}}</td>
@@ -209,7 +213,7 @@
                                     No
                                 </td>
                                 <td class="row-edit" id="emp-row-edit"><span (click)="onEmpEdit(employee)"><i class="fa fa-edit"></i></span></td>
-                                <td class="row-delete" id="emp-row-delete" (click)="open(employee)"><i class="fa fa-eraser"></i></td>
+                                <td class="row-delete" id="emp-row-delete" (click)="onEmpDelete(employee)"><i class="fa fa-eraser"></i></td>
                             </tr>
                         </tbody>
                     </table>
