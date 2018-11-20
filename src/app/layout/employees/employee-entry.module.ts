@@ -9,6 +9,7 @@ import {
 import { PageHeaderModule } from '../../shared';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/employee-edit-form-modal.component';
 
 @NgModule({
     imports: [
@@ -22,6 +23,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         PageHeaderModule,
         BsComponentModule],
     declarations: [
-        EmployeeEntryComponent]
+        EmployeeEntryComponent,
+        EmployeeEditFormModalComponent],
+    entryComponents: [
+        EmployeeEditFormModalComponent
+    ]
 })
 export class EmployeeEntryModule { }

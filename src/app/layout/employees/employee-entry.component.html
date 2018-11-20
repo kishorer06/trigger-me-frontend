@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Employee-Entry'" [icon]="'fa fa-address-book'"></app-page-header>
+    <app-page-header [heading]="'Employee'" [icon]="'fa fa-fw fa-address-book'"></app-page-header>
 
     <div class="row">
         <div class="col col-xl-4 col-lg-12">
@@ -162,8 +162,8 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-secondary" (click)="empEntry()">Submit Button</button> &nbsp;
-                        <button type="reset" class="btn btn-secondary" (click)="onReset()">Reset Button</button>
+                        <button type="submit" class="btn btn-secondary" (click)="empEntry()">Submit</button> &nbsp;
+                        <button type="reset" class="btn btn-secondary" (click)="onReset()">Reset</button>
 
                     </form>
                 </div>
@@ -173,8 +173,13 @@
         <div class="col col-xl-8 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">Employees</div>
+                <div *ngIf="isSpinner" class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
                 <div class="card-body table-responsive">
-                    <table class="card-body table table-hover">
+                    <table *ngIf="!isSpinner" class="card-body table table-hover">
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -192,11 +197,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <div *ngIf="isSpinner" class="spinner">
-                                <div class="bounce1"></div>
-                                <div class="bounce2"></div>
-                                <div class="bounce3"></div>
-                            </div>
                             <tr *ngFor="let employee of employeeList; index as i">
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{employee.empFName}}</td>
@@ -204,7 +204,7 @@
                                 <td>{{employee.phoneNumber}}</td>
                                 <td>{{employee.email}}</td>
                                 <td>{{employee.status}}</td>
-                                <td>{{employee.statusStartDate | date}}<strong>/</strong>{{employee.statusEndDate | date}}</td>
+                                <td>{{employee.statusStartDate | date}}/{{employee.statusEndDate | date}}</td>
                                 <td>{{employee.projectStartDate | date}}/{{employee.projectEndDate | date}}</td>
                                 <td>{{employee.empStartDate | date}}/{{employee.empEndDate | date}}</td>
                                 <td *ngIf="employee.empEVerifyStatus"> yes
@@ -212,8 +212,8 @@
                                 <td *ngIf="!employee.empEVerifyStatus" class="table-danger">
                                     No
                                 </td>
-                                <td class="row-edit" id="emp-row-edit"><span (click)="onEmpEdit(employee)"><i class="fa fa-edit"></i></span></td>
-                                <td class="row-delete" id="emp-row-delete" (click)="onEmpDelete(employee)"><i class="fa fa-eraser"></i></td>
+                                <td class="row-edit" id="emp-row-edit" (click)="empEditOpen(employee)"><i class=" fa fa-edit"></i></td>
+                                <td class="row-delete" id="emp-row-delete" (click)="empDeleteOpen(employee)"><i class="fa fa-trash"></i></td>
                             </tr>
                         </tbody>
                     </table>

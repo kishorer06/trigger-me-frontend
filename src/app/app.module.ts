@@ -14,8 +14,7 @@ import { AppComponent } from './app.component';
 import { EmployeeEntryService } from './layout/employees/employee-entry.service';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import { ErrorModalComponent } from './modals/error-modal/error-modal.component';
-import { ConfirmationModalComponent } from './modals/confirmation-modal/confirmation-modal.component';
-import { EditComponentModal } from './modals/edit-component-modal/edit-component-modal.component';
+import { InformationModalComponent } from './modals/information-modal/information-modal.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -40,12 +39,15 @@ export function createTranslateLoader(http: HttpClient) {
         HttpModule,
         AppRoutingModule
     ],
-    declarations: [AppComponent, SuccessModalComponent, ErrorModalComponent, ConfirmationModalComponent, EditComponentModal],
+    declarations: [AppComponent, SuccessModalComponent, ErrorModalComponent, InformationModalComponent],
     providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: TokenInterceptor,
         multi: true
     }, AuthGuard, AuthService, UserService, EmployeeEntryService],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+        SuccessModalComponent, InformationModalComponent, ErrorModalComponent
+    ]
 })
 export class AppModule { }

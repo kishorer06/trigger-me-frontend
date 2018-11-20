@@ -11,7 +11,7 @@ const routes: Routes = [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-            { path: 'employee-entry', loadChildren: './employees/employee-entry.module#EmployeeEntryModule' },
+            { path: 'employee', loadChildren: './employees/employee-entry.module#EmployeeEntryModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },

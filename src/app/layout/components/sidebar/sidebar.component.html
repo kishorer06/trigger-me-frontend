@@ -1,13 +1,13 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <div class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{'Dashboard' | translate }}
         </a>
         <!-- <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Charts' | translate }}
         </a> -->
-        <a [routerLink]="['/employee-entry']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-address-book"></i>&nbsp;{{ 'Employee-Entry'}}
+        <a [routerLink]="['/employee']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-address-book"></i>&nbsp;{{'Employee' }}
         </a>
         <!-- <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' | translate }}
@@ -46,9 +46,9 @@
             <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
         </a> -->
         <div class="header-fields">
-            <a (click)="rltAndLtr()" class="list-group-item">
+            <!-- <a (click)="rltAndLtr()" class="list-group-item">
                 <span><i class="fa fa-arrows-h"></i>&nbsp; RTL/LTR</span>
-            </a>
+            </a> -->
             <!-- <div class="nested-menu">
                 <a class="list-group-item" (click)="addExpandClass('languages')">
                     <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' | translate }} <b class="caret"></b></span>
