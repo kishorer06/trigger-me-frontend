@@ -122,6 +122,7 @@ export class EmployeeEntryComponent implements OnInit {
             updateEmpRecord.projectEndDate = this.formatDate(updateEmpRecord.projectEndDate);
             updateEmpRecord.empStartDate = this.formatDate(updateEmpRecord.empStartDate);
             updateEmpRecord.empEndDate = this.formatDate(updateEmpRecord.empEndDate);
+            modalRef.close();
             this.saveEmpEdit(updateEmpRecord);
         })
     }
