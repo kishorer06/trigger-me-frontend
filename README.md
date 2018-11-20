@@ -18,11 +18,13 @@ In order to start the project locally, use:
 ```bash
 $ git clone https://github.com/kishorer06/trigger_me.git
 $ cd ../trigger-me-frontend/
+# install angular-cli & typescript modules before we start trigger-me app.
+# npm install -g @angular/cli
+# npm install -g typescript
 # install the project's dependencies
-# before running `npm run start-dev`, remove 'postinstall' script in the package.json and also host file should have
-# www.trigger-me.com mapped with localhost. watches your files and uses livereload by default run `npm run start-dev` for a dev
-# server which bootstraps application dependencies and opens up automatically in the browser. If not then, navigate to
-# `http://www.trigger-me.com:4200/`. The app will automatically reload if you change any of the source files.
+# before running `npm run start-dev`, remove 'postinstall' script in the package.json and also host # file should have www.trigger-me.com mapped with localhos watches your files and uses livereload # # by default.
+# run `npm run start-dev` for a dev server which bootstraps application dependencies and opens up # # automatically in the browser. If not then, navigate to
+# `http://www.trigger-me.com:4200/`. The app will automatically reload if you change any of the # # # source files.
 $ npm run start-dev
 ```
 
