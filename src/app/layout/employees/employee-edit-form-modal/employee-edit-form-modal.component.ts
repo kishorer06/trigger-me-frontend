@@ -2,8 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Employee } from '../../../model';
-import * as moment from 'moment';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { UtilsService } from '../../../shared/services/utils.service';
 
 @Component({
     selector: 'app-employee-edit-form-modal',
@@ -19,7 +18,8 @@ export class EmployeeEditFormModalComponent implements OnInit {
     employeeEditModel: Employee = new Employee();
     constructor(
         public activeModal: NgbActiveModal,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private utilsService: UtilsService
     ) {
     }
 
@@ -31,12 +31,12 @@ export class EmployeeEditFormModalComponent implements OnInit {
             phoneNumber: [this.employeeEdit.phoneNumber, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
             email: [this.employeeEdit.email, [Validators.required, Validators.email]],
             status: [this.employeeEdit.status, [Validators.required, Validators.minLength(3)]],
-            statusStartDate: [this.formatDateToDatePicker(this.employeeEdit.statusStartDate), [Validators.required]],
-            statusEndDate: [this.formatDateToDatePicker(this.employeeEdit.statusEndDate), [Validators.required]],
-            projectStartDate: [this.formatDateToDatePicker(this.employeeEdit.projectStartDate), [Validators.required]],
-            projectEndDate: [this.formatDateToDatePicker(this.employeeEdit.projectEndDate), [Validators.required]],
-            empStartDate: [this.formatDateToDatePicker(this.employeeEdit.empStartDate), [Validators.required]],
-            empEndDate: [this.formatDateToDatePicker(this.employeeEdit.empEndDate), [Validators.required]],
+            statusStartDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.statusStartDate), [Validators.required]],
+            statusEndDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.statusEndDate), [Validators.required]],
+            projectStartDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.projectStartDate), [Validators.required]],
+            projectEndDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.projectEndDate), [Validators.required]],
+            empStartDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.empStartDate), [Validators.required]],
+            empEndDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.empEndDate), [Validators.required]],
             empEVerifyStatus: [this.employeeEdit.empEVerifyStatus, [Validators.required]]
         })
     }
@@ -63,22 +63,4 @@ export class EmployeeEditFormModalComponent implements OnInit {
         }
     }
 
-    formatDateToDatePicker(date: Date) {
-        return this.parse(moment(date).format('YYYY-MM-DD'));
-
-    }
-
-    parse(value: any) {
-        if (value) {
-            const dateParts = value.trim().split('-');
-            if (dateParts.length === 3 && dateParts[0] && dateParts[1] && dateParts[2]) {
-                var ngbEmpDate = { 'year': toInteger(dateParts[0]), 'month': toInteger(dateParts[1]), 'day': toInteger(dateParts[2]) };
-                return ngbEmpDate;
-            }
-            else {
-                return null;
-            }
-        }
-        return null;
-    }
 }

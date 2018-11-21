@@ -170,7 +170,7 @@
             </div>
         </div>
         <!-- employee list -->
-        <div class="col col-xl-8 col-lg-12">
+        <div *ngIf="!emptyEmpRecords" class="col col-xl-8 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">Employees</div>
                 <div *ngIf="isSpinner" class="spinner">
@@ -179,7 +179,7 @@
                     <div class="bounce3"></div>
                 </div>
                 <div class="card-body table-responsive">
-                    <table *ngIf="!isSpinner" class="card-body table table-hover">
+                    <table class="card-body table table-hover">
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -209,8 +209,8 @@
                                 <td>{{employee.empStartDate | date}}/{{employee.empEndDate | date}}</td>
                                 <td *ngIf="employee.empEVerifyStatus"> yes
                                 </td>
-                                <td *ngIf="!employee.empEVerifyStatus" class="table-danger">
-                                    No
+                                <td *ngIf="!employee.empEVerifyStatus">
+                                    <span style="color:red;">No</span>
                                 </td>
                                 <td class="row-edit" id="emp-row-edit" (click)="empEditOpen(employee)"><i class=" fa fa-edit"></i></td>
                                 <td class="row-delete" id="emp-row-delete" (click)="empDeleteOpen(employee)"><i class="fa fa-trash"></i></td>

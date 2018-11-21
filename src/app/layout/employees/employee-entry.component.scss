@@ -9,3 +9,7 @@
 .row-delete:hover{
 color: red;
 }
+.card-body {
+max-height: 600px !important;
+     overflow-y:scroll;
+  }
