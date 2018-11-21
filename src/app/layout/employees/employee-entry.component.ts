@@ -12,6 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { InformationModalComponent } from "../../modals/information-modal/information-modal.component";
 import { SuccessModalComponent } from '../../modals/success-modal/success-modal.component';
 import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/employee-edit-form-modal.component';
+import { ErrorModalComponent } from '../../modals/error-modal/error-modal.component';
+import { UtilsService } from '../../shared/services/utils.service';
+import * as moment from 'moment';
+
 
 @Component({
     selector: 'app-employee-entry',
@@ -21,10 +25,15 @@ import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/emplo
 })
 export class EmployeeEntryComponent implements OnInit {
     _date: any;
-    constructor(private fb: FormBuilder, private emplService: EmployeeEntryService, private ngModal: NgbModal) { }
+    emptyEmpRecords: boolean;
+    constructor(private fb: FormBuilder,
+        private emplService: EmployeeEntryService,
+        private ngModal: NgbModal,
+        private utilsService: UtilsService) { }
     employeeEntryForm: FormGroup;
     employeeEntry: Employee = new Employee();
-    employeeList;
+    employeeList = [];
+    employeeNewList;
     title: string;
     closeResult: string;
     submitted = false;
@@ -71,9 +80,21 @@ export class EmployeeEntryComponent implements OnInit {
     }
 
     getEmployees() {
+        this.emptyEmpRecords = false;
         this.emplService.getEmployeesService().subscribe(res => {
             this.isSpinner = false;
-            this.employeeList = res;
+            this.employeeNewList = res;
+            for (var empValue of this.employeeNewList) {
+                empValue.statusStartDate = this.formatServerDateToDatePicker(empValue.statusStartDate);
+                empValue.statusEndDate = this.formatServerDateToDatePicker(empValue.statusEndDate);
+                empValue.projectStartDate = this.formatServerDateToDatePicker(empValue.projectStartDate);
+                empValue.projectEndDate = this.formatServerDateToDatePicker(empValue.projectEndDate);
+                empValue.empStartDate = this.formatServerDateToDatePicker(empValue.empStartDate);
+                empValue.empEndDate = this.formatServerDateToDatePicker(empValue.empEndDate);
+                this.employeeList.push(empValue);
+            }
+            if (!(this.employeeList.length >= 1))
+                this.emptyEmpRecords = true;
         }, (_err: HttpErrorResponse) => {
 
         });
@@ -95,6 +116,10 @@ export class EmployeeEntryComponent implements OnInit {
             modalRef.componentInstance.message = `Successfully updated ${_empEditRow.email} profile.`;
             this.getEmployees();
         }, (_err: HttpErrorResponse) => {
+            const modalRef = this.ngModal.open(ErrorModalComponent);
+            if (_err.status == 400) {
+                modalRef.componentInstance.message = `Sorry unable to update ${_empEditRow.email} profile. Please check your inputs and try again!`;
+            }
         });
     }
 
@@ -149,6 +174,10 @@ export class EmployeeEntryComponent implements OnInit {
         } else {
             return `with: ${reason}`;
         }
+    }
+
+    formatServerDateToDatePicker(date: Date) {
+        return moment(date).format('YYYY-MM-DD');
     }
 
 }

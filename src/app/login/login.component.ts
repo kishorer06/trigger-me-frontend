@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.isLoading = true;
+        this.user.username = this.user.username.toLowerCase();
         this.authService.logIn(this.user)
             .subscribe(_data => {
                 this.isLoading = false;
