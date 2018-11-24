@@ -9,9 +9,16 @@ export class UtilsService {
 
     constructor() { }
 
+    formatDate(_date) {
+        var formattedDate = "";
+        if (typeof _date.day === 'number' && _date.day >>> 0 === _date.day % 10)
+            return formattedDate = JSON.stringify(_date.year) + "-" + JSON.stringify(_date.month) + "-0" + JSON.stringify(_date.day);
+        else
+            return formattedDate = JSON.stringify(_date.year) + "-" + JSON.stringify(_date.month) + "-" + JSON.stringify(_date.day);
+    }
+
     formatDateToDatePicker(date: Date) {
         return this.parse(moment(date).format('YYYY-MM-DD'));
-
     }
 
     parse(value: any) {

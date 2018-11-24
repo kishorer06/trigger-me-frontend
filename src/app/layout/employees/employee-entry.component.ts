@@ -14,7 +14,6 @@ import { SuccessModalComponent } from '../../modals/success-modal/success-modal.
 import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/employee-edit-form-modal.component';
 import { ErrorModalComponent } from '../../modals/error-modal/error-modal.component';
 import { UtilsService } from '../../shared/services/utils.service';
-import * as moment from 'moment';
 
 
 @Component({
@@ -32,8 +31,7 @@ export class EmployeeEntryComponent implements OnInit {
         private utilsService: UtilsService) { }
     employeeEntryForm: FormGroup;
     employeeEntry: Employee = new Employee();
-    employeeList = [];
-    employeeNewList;
+    employeeList;
     title: string;
     closeResult: string;
     submitted = false;
@@ -53,7 +51,6 @@ export class EmployeeEntryComponent implements OnInit {
             empEndDate: [null, [Validators.required]],
             isEmpEVerifyStatus: [false, [Validators.required]]
         })
-
         this.getEmployees();
     }
 
@@ -64,18 +61,17 @@ export class EmployeeEntryComponent implements OnInit {
         this.submitted = true;
         if (this.employeeEntryForm.valid) {
             this.employeeEntry.isEmpEVerifyStatus = (this.employeeEntryForm.controls.isEmpEVerifyStatus.value === 'true') ? true : false;
-            this.employeeEntry.statusStartDate = this.formatDate(this.employeeEntryForm.controls.statusStartDate.value);
-            this.employeeEntry.statusEndDate = this.formatDate(this.employeeEntryForm.controls.statusEndDate.value);
-            this.employeeEntry.projectStartDate = this.formatDate(this.employeeEntryForm.controls.projectStartDate.value);
-            this.employeeEntry.projectEndDate = this.formatDate(this.employeeEntryForm.controls.projectEndDate.value);
-            this.employeeEntry.empStartDate = this.formatDate(this.employeeEntryForm.controls.empStartDate.value);
-            this.employeeEntry.empEndDate = this.formatDate(this.employeeEntryForm.controls.empEndDate.value);
+            this.employeeEntry.statusStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.statusStartDate.value);
+            this.employeeEntry.statusEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.statusEndDate.value);
+            this.employeeEntry.projectStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.projectStartDate.value);
+            this.employeeEntry.projectEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.projectEndDate.value);
+            this.employeeEntry.empStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.empStartDate.value);
+            this.employeeEntry.empEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.empEndDate.value);
             this.emplService.saveEmployeeService(this.employeeEntry).subscribe(_res => {
                 this.getEmployees();
             }, (_err: HttpErrorResponse) => {
             });
             this.onReset();
-
         }
     }
 
@@ -83,26 +79,14 @@ export class EmployeeEntryComponent implements OnInit {
         this.emptyEmpRecords = false;
         this.emplService.getEmployeesService().subscribe(res => {
             this.isSpinner = false;
-            this.employeeNewList = res;
-            for (var empValue of this.employeeNewList) {
-                empValue.statusStartDate = this.formatServerDateToDatePicker(empValue.statusStartDate);
-                empValue.statusEndDate = this.formatServerDateToDatePicker(empValue.statusEndDate);
-                empValue.projectStartDate = this.formatServerDateToDatePicker(empValue.projectStartDate);
-                empValue.projectEndDate = this.formatServerDateToDatePicker(empValue.projectEndDate);
-                empValue.empStartDate = this.formatServerDateToDatePicker(empValue.empStartDate);
-                empValue.empEndDate = this.formatServerDateToDatePicker(empValue.empEndDate);
-                this.employeeList.push(empValue);
-            }
+            this.employeeList = res;
             if (!(this.employeeList.length >= 1))
                 this.emptyEmpRecords = true;
         }, (_err: HttpErrorResponse) => {
-
+            this.isSpinner = false;
+            const modalRef = this.ngModal.open(ErrorModalComponent);
+            modalRef.componentInstance.message = `Oops! unable to load information. Please try again!`;
         });
-    }
-
-    formatDate(_date) {
-        var formattedDate = JSON.stringify(_date.year) + "-" + JSON.stringify(_date.month) + "-" + JSON.stringify(_date.day);
-        return formattedDate;
     }
 
     onReset() {
@@ -141,12 +125,12 @@ export class EmployeeEntryComponent implements OnInit {
         modalRef.componentInstance.id = 10;
         modalRef.componentInstance.employeeEdit = _empl;
         modalRef.componentInstance.passEmployeeEdit.subscribe((updateEmpRecord) => {
-            updateEmpRecord.statusStartDate = this.formatDate(updateEmpRecord.statusStartDate);
-            updateEmpRecord.statusEndDate = this.formatDate(updateEmpRecord.statusEndDate);
-            updateEmpRecord.projectStartDate = this.formatDate(updateEmpRecord.projectStartDate);
-            updateEmpRecord.projectEndDate = this.formatDate(updateEmpRecord.projectEndDate);
-            updateEmpRecord.empStartDate = this.formatDate(updateEmpRecord.empStartDate);
-            updateEmpRecord.empEndDate = this.formatDate(updateEmpRecord.empEndDate);
+            updateEmpRecord.statusStartDate = this.utilsService.formatDate(updateEmpRecord.statusStartDate);
+            updateEmpRecord.statusEndDate = this.utilsService.formatDate(updateEmpRecord.statusEndDate);
+            updateEmpRecord.projectStartDate = this.utilsService.formatDate(updateEmpRecord.projectStartDate);
+            updateEmpRecord.projectEndDate = this.utilsService.formatDate(updateEmpRecord.projectEndDate);
+            updateEmpRecord.empStartDate = this.utilsService.formatDate(updateEmpRecord.empStartDate);
+            updateEmpRecord.empEndDate = this.utilsService.formatDate(updateEmpRecord.empEndDate);
             modalRef.close();
             this.saveEmpEdit(updateEmpRecord);
         })
@@ -174,10 +158,6 @@ export class EmployeeEntryComponent implements OnInit {
         } else {
             return `with: ${reason}`;
         }
-    }
-
-    formatServerDateToDatePicker(date: Date) {
-        return moment(date).format('YYYY-MM-DD');
     }
 
 }
