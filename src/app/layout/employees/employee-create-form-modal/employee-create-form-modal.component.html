@@ -5,10 +5,10 @@
     </button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="employeeEditForm">
+    <form [formGroup]="employeeEntryForm">
         <fieldset class="form-group">
             <label>First Name:</label>
-            <input type="text" class="form-control" placeholder="John" [ngClass]="{ 'is-invalid': submitted && efb.empFName.errors }" name="empFName" formControlName="empFName" required>
+            <input type="text" class="form-control" placeholder="John" [(ngModel)]="employeeEntry.empFName" [ngClass]="{ 'is-invalid': submitted && efb.empFName.errors }" name="empFName" formControlName="empFName" required>
             <div *ngIf="submitted && efb.empFName.errors">
                 <div *ngIf="efb.empFName.errors.required" class="alert alert-danger">First Name is required</div>
                 <div *ngIf="efb.empFName.errors.minlength" class="alert alert-danger">First Name should have atleast 2 characters</div>
@@ -16,7 +16,7 @@
         </fieldset>
         <fieldset class="form-group">
             <label>Last Name:</label>
-            <input type="text" class="form-control" placeholder="David" [ngClass]="{ 'is-invalid': submitted && efb.empLName.errors }" name="empLName" formControlName="empLName" required>
+            <input type="text" class="form-control" placeholder="David" [(ngModel)]="employeeEntry.empLName" [ngClass]="{ 'is-invalid': submitted && efb.empLName.errors }" name="empLName" formControlName="empLName" required>
             <div *ngIf="submitted && efb.empLName.errors">
                 <div *ngIf="efb.empLName.errors.required" class="alert alert-danger">Last Name is required</div>
                 <div *ngIf="efb.empLName.errors.minlength" class="alert alert-danger">Last Name Name should have atleast 2 characters</div>
@@ -24,7 +24,8 @@
         </fieldset>
         <fieldset class="form-group">
             <label>Phone Number:</label>
-            <input type="tel" class="form-control" placeholder="1234567890" maxlength="12" [ngClass]="{ 'is-invalid': submitted && efb.phoneNumber.errors }" name="phoneNumber" formControlName="phoneNumber" required>
+            <input type="tel" class="form-control" placeholder="1234567890" maxlength="12" [(ngModel)]="employeeEntry.phoneNumber" [ngClass]="{ 'is-invalid': submitted && efb.phoneNumber.errors }" name="phoneNumber" formControlName="phoneNumber"
+              required>
             <div *ngIf="submitted && efb.phoneNumber.errors">
                 <div *ngIf="efb.phoneNumber.errors.required" class="alert alert-danger">Phone Number is required</div>
                 <div *ngIf="efb.phoneNumber.errors.minlength || efb.phoneNumber.errors.maxlength" class="alert alert-danger">Invalid Phone Number</div>
@@ -32,7 +33,7 @@
         </fieldset>
         <fieldset class="form-group">
             <label>Email:</label>
-            <input type="email" class="form-control" placeholder="abc@xyz.com" [ngClass]="{ 'is-invalid': submitted && efb.email.errors }" name="email" formControlName="email" required>
+            <input type="email" class="form-control" placeholder="abc@xyz.com" [(ngModel)]="employeeEntry.email" [ngClass]="{ 'is-invalid': submitted && efb.email.errors }" name="email" formControlName="email" required>
             <div *ngIf="submitted && efb.email.errors">
                 <div *ngIf="efb.email.errors.required" class="alert alert-danger">Email is required</div>
                 <div *ngIf="efb.email.errors.email" class="alert alert-danger">Invalid Email</div>
@@ -40,7 +41,7 @@
         </fieldset>
         <fieldset class="form-group">
             <label>Status:</label>
-            <input type="text" class="form-control" placeholder="H1/L1/OPT..." [ngClass]="{ 'is-invalid': submitted && efb.status.errors }" name="status" formControlName="status" required>
+            <input type="text" class="form-control" placeholder="H1/L1/OPT..." [(ngModel)]="employeeEntry.status" [ngClass]="{ 'is-invalid': submitted && efb.status.errors }" name="status" formControlName="status" required>
             <div *ngIf="submitted && efb.status.errors">
                 <div *ngIf="efb.status.errors.required" class="alert alert-danger">Status is required</div>
                 <div *ngIf="efb.status.errors.minlength" class="alert alert-danger">Status should have atleast 3 characters</div>
@@ -50,8 +51,9 @@
             <label>Status Start Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusStartDate" [ngClass]="{ 'is-invalid': submitted && efb.statusStartDate.errors }" name="dp1" ngbDatepicker #dp1="ngbDatepicker">
-                    <button class="input-group-addon" (click)="dp1.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusStartDate" [(ngModel)]="employeeEntry.statusStartDate" [ngClass]="{ 'is-invalid': submitted && efb.statusStartDate.errors }" name="statusStartDate"
+                      ngbDatepicker #statusStartDate="ngbDatepicker">
+                    <button class="input-group-addon" (click)="statusStartDate.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -65,8 +67,9 @@
             <label>Status End Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusEndDate" [ngClass]="{ 'is-invalid': submitted && efb.statusEndDate.errors }" name="dp2" ngbDatepicker #dp2="ngbDatepicker">
-                    <button class="input-group-addon" (click)="dp2.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusEndDate" [(ngModel)]="employeeEntry.statusEndDate" [ngClass]="{ 'is-invalid': submitted && efb.statusEndDate.errors }" name="statusEndDate" ngbDatepicker
+                      #statusEndDate="ngbDatepicker">
+                    <button class="input-group-addon" (click)="statusEndDate.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -80,8 +83,9 @@
             <label>Project Start Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectStartDate" [ngClass]="{ 'is-invalid': submitted && efb.projectStartDate.errors }" name="dp3" ngbDatepicker #dp3="ngbDatepicker">
-                    <button class="input-group-addon" (click)="dp3.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectStartDate" [(ngModel)]="employeeEntry.projectStartDate" [ngClass]="{ 'is-invalid': submitted && efb.projectStartDate.errors }" name="projectStartDate"
+                      ngbDatepicker #projectStartDate="ngbDatepicker">
+                    <button class="input-group-addon" (click)="projectStartDate.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -95,8 +99,9 @@
             <label>Project End Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectEndDate" [ngClass]="{ 'is-invalid': submitted && efb.projectEndDate.errors }" name="dp4" ngbDatepicker #dp4="ngbDatepicker">
-                    <button class="input-group-addon" (click)="dp4.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectEndDate" [(ngModel)]="employeeEntry.projectEndDate" [ngClass]="{ 'is-invalid': submitted && efb.projectEndDate.errors }" name="projectEndDate"
+                      ngbDatepicker #projectEndDate="ngbDatepicker">
+                    <button class="input-group-addon" (click)="projectEndDate.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -110,8 +115,9 @@
             <label>Employee Start Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empStartDate" [ngClass]="{ 'is-invalid': submitted && efb.empStartDate.errors }" name="dp5" ngbDatepicker #dp5="ngbDatepicker">
-                    <button class="input-group-addon" (click)="dp5.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empStartDate" [(ngModel)]="employeeEntry.empStartDate" [ngClass]="{ 'is-invalid': submitted && efb.empStartDate.errors }" name="empStartDate" ngbDatepicker
+                      #empStartDate="ngbDatepicker">
+                    <button class="input-group-addon" (click)="empStartDate.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -125,8 +131,8 @@
             <label>Employee End Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empEndDate" [ngClass]="{ 'is-invalid': submitted && efb.empEndDate.errors }" name="dp6" ngbDatepicker #dp6="ngbDatepicker">
-                    <button class="input-group-addon" (click)="dp6.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empEndDate" [(ngModel)]="employeeEntry.empEndDate" [ngClass]="{ 'is-invalid': submitted && efb.empEndDate.errors }" name="empEndDate" ngbDatepicker #empEndDate="ngbDatepicker">
+                    <button class="input-group-addon" (click)="empEndDate.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -139,21 +145,24 @@
         <div class="form-group">
             <label>Employee E-Verified Status:</label>
             <br>
-            <div class="btn-group btn-group-toggle" ngbRadioGroup [ngClass]="{ 'is-invalid': submitted && efb.empEVerifyStatus.errors }" name="empEVerifyStatus" formControlName="empEVerifyStatus">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="employeeEntry.isEmpEVerifyStatus" [ngClass]="{ 'is-invalid': submitted && efb.isEmpEVerifyStatus.errors }" name="isEmpEVerifyStatus" formControlName="isEmpEVerifyStatus">
                 <label ngbButtonLabel class="btn-primary">
-                    <input ngbButton type="radio" [value]="true"> Yes
+                    <input ngbButton type="radio" value="true"> Yes
                 </label>
                 <label ngbButtonLabel class="btn-primary">
                     <input ngbButton type="radio" [value]="false"> No
                 </label>
             </div>
-            <div *ngIf="submitted && efb.empEVerifyStatus.errors">
-                <div *ngIf="efb.empEVerifyStatus.errors.required" class="alert alert-danger">Employee E-Verified Status is required</div>
+            <div *ngIf="submitted && efb.isEmpEVerifyStatus.errors">
+                <div *ngIf="efb.isEmpEVerifyStatus.errors.required" class="alert alert-danger">Employee E-Verified Status is required</div>
             </div>
         </div>
+
+        <button type="submit" class="btn btn-secondary" (click)="passbackEmployeeCreateModel()">Submit</button> &nbsp;
+        <button type="reset" class="btn btn-secondary" (click)="onReset()">Reset</button>
+
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="passBackEmployeeEditForm()">Ok</button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close')">Close</button>
 </div>

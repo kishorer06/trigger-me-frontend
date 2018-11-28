@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
-import { UserService } from '../../../app/shared';
 import { HttpErrorResponse } from '@angular/common/http';
+import { EmployeeEntryService } from '../employees/employee-entry.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -12,8 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
+    totalEmployees = 0;
+    totalInactiveEmployees = 0;
 
-    constructor(private userService: UserService) {
+    constructor(private empService: EmployeeEntryService) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -54,7 +56,24 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.getTotalEmployees();
+        this.getInactiveEmployees();
+    }
+
+    getTotalEmployees() {
+        this.empService.getEmployeesService().subscribe((res: any) => {
+            this.totalEmployees = res.length;
+        }, (_err: HttpErrorResponse) => {
+        });
+    }
+
+    getInactiveEmployees() {
+        this.empService.getInactiveEmployeesService().subscribe((res: any) => {
+            this.totalInactiveEmployees = res.length;
+        }, (_err: HttpErrorResponse) => {
+        });
+    }
 
     public closeAlert(alert: any) {
         const index: number = this.alerts.indexOf(alert);

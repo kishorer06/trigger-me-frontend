@@ -10,7 +10,7 @@ export class EmployeeEntryService {
     constructor(private http: HttpClient) { }
 
     saveEmployeeService(emp) {
-        return this.http.post(this.apiUrl + ApiConstants.saveEmployee, this.getJsonStringify(emp));
+        return this.http.post(this.apiUrl + ApiConstants.saveEmployee, JSON.stringify(emp));
     }
 
     getEmployeesService() {
@@ -22,10 +22,10 @@ export class EmployeeEntryService {
     }
 
     editEmpService(emp) {
-        return this.http.patch(this.apiUrl + ApiConstants.updateEmployee, this.getJsonStringify(emp));
+        return this.http.patch(this.apiUrl + ApiConstants.updateEmployee, JSON.stringify(emp));
     }
 
-    getJsonStringify(emp) {
-        return JSON.stringify(emp);
+    getInactiveEmployeesService() {
+        return this.http.get(this.apiUrl + ApiConstants.getInactiveEmployees);
     }
 }

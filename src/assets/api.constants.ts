@@ -1,10 +1,11 @@
 export const ApiConstants = {
-    token: 'tm/token',
-    register: 'tm/register',
+    deleteEmployee: 'tm/deleteEmployee',
     getUser: 'tm/getUser',
     getEmployeeById: 'tm/getEmployeeById',
-    saveEmployee: 'tm/saveEmployee',
     getEmployees: 'tm/getEmployees',
-    updateEmployee: 'tm/updateEmployee',
-    deleteEmployee: 'tm/deleteEmployee'
+    getInactiveEmployees: 'tm/getInactiveEmployees',
+    register: 'tm/register',
+    saveEmployee: 'tm/saveEmployee',
+    token: 'tm/token',
+    updateEmployee: 'tm/updateEmployee'
 };

@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import {
-    FormGroup,
-    FormBuilder,
-    Validators,
-} from '@angular/forms';
 import { EmployeeEntryService } from './employee-entry.service';
-import { Employee } from '../../model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { InformationModalComponent } from "../../modals/information-modal/information-modal.component";
 import { SuccessModalComponent } from '../../modals/success-modal/success-modal.component';
 import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/employee-edit-form-modal.component';
 import { ErrorModalComponent } from '../../modals/error-modal/error-modal.component';
 import { UtilsService } from '../../shared/services/utils.service';
+import { EmployeeCreateFormModalComponent } from './employee-create-form-modal/employee-create-form-modal.component';
 
 
 @Component({
@@ -25,54 +20,24 @@ import { UtilsService } from '../../shared/services/utils.service';
 export class EmployeeEntryComponent implements OnInit {
     _date: any;
     emptyEmpRecords: boolean;
-    constructor(private fb: FormBuilder,
-        private emplService: EmployeeEntryService,
+    constructor(private emplService: EmployeeEntryService,
         private ngModal: NgbModal,
         private utilsService: UtilsService) { }
-    employeeEntryForm: FormGroup;
-    employeeEntry: Employee = new Employee();
     employeeList;
     title: string;
     closeResult: string;
     submitted = false;
     isSpinner = true;
     ngOnInit() {
-        this.employeeEntryForm = this.fb.group({
-            empFName: ['', [Validators.required, Validators.minLength(2)]],
-            empLName: ['', [Validators.required, Validators.minLength(2)]],
-            phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-            email: ['', [Validators.required, Validators.email]],
-            status: ['', [Validators.required, Validators.minLength(3)]],
-            statusStartDate: [null, [Validators.required]],
-            statusEndDate: [null, [Validators.required]],
-            projectStartDate: [null, [Validators.required]],
-            projectEndDate: [null, [Validators.required]],
-            empStartDate: [null, [Validators.required]],
-            empEndDate: [null, [Validators.required]],
-            isEmpEVerifyStatus: [false, [Validators.required]]
-        })
         this.getEmployees();
     }
 
-    // convenience getter for easy access to form fields
-    get efb() { return this.employeeEntryForm.controls; }
-
-    empEntry() {
-        this.submitted = true;
-        if (this.employeeEntryForm.valid) {
-            this.employeeEntry.isEmpEVerifyStatus = (this.employeeEntryForm.controls.isEmpEVerifyStatus.value === 'true') ? true : false;
-            this.employeeEntry.statusStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.statusStartDate.value);
-            this.employeeEntry.statusEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.statusEndDate.value);
-            this.employeeEntry.projectStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.projectStartDate.value);
-            this.employeeEntry.projectEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.projectEndDate.value);
-            this.employeeEntry.empStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.empStartDate.value);
-            this.employeeEntry.empEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.empEndDate.value);
-            this.emplService.saveEmployeeService(this.employeeEntry).subscribe(_res => {
-                this.getEmployees();
-            }, (_err: HttpErrorResponse) => {
-            });
-            this.onReset();
-        }
+    empEntry(addEmpRecord, modalRef) {
+        this.emplService.saveEmployeeService(addEmpRecord).subscribe(_res => {
+            modalRef.close();
+            this.getEmployees();
+        }, (_err: HttpErrorResponse) => {
+        });
     }
 
     getEmployees() {
@@ -87,11 +52,6 @@ export class EmployeeEntryComponent implements OnInit {
             const modalRef = this.ngModal.open(ErrorModalComponent);
             modalRef.componentInstance.message = `Oops! unable to load information. Please try again!`;
         });
-    }
-
-    onReset() {
-        this.submitted = false;
-        this.employeeEntryForm.reset();
     }
 
     saveEmpEdit(_empEditRow) {
@@ -148,6 +108,16 @@ export class EmployeeEntryComponent implements OnInit {
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
+    }
+
+    openEmpCreateModal() {
+        this.title = "Create Employee Profile";
+        const modalRef = this.ngModal.open(EmployeeCreateFormModalComponent);
+        modalRef.componentInstance.title = 'Create Employee';
+        modalRef.componentInstance.id = 10;
+        modalRef.componentInstance.passEmployeeCreate.subscribe((createEmpRecord) => {
+            this.empEntry(createEmpRecord, modalRef);
+        })
     }
 
     private getDismissReason(reason: any): string {
