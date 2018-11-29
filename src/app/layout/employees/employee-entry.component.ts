@@ -28,6 +28,7 @@ export class EmployeeEntryComponent implements OnInit {
     closeResult: string;
     submitted = false;
     isSpinner = true;
+    public searchText: any;
     ngOnInit() {
         this.getEmployees();
     }

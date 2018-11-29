@@ -6,7 +6,7 @@ import { BsComponentModule } from '../../layout/bs-component/bs-component.module
 import {
     DatePickerModule
 } from '../../layout/bs-component/components/date-picker/date-picker.module';
-import { PageHeaderModule } from '../../shared';
+import { PageHeaderModule, SharedPipesModule } from '../../shared';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/employee-edit-form-modal.component';
@@ -22,6 +22,7 @@ import { EmployeeCreateFormModalComponent } from './employee-create-form-modal/e
         EmployeeEntryModuleRoutingModule,
         ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
         PageHeaderModule,
+        SharedPipesModule,
         BsComponentModule],
     declarations: [
         EmployeeEntryComponent,

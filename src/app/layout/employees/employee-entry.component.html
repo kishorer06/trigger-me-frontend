@@ -11,11 +11,18 @@
                     <div class="bounce2"></div>
                     <div class="bounce3"></div>
                 </div>
-                <div class="card-body table-responsive">
-                    <div class="d-flex flex-row-reverse">
-                        <div class="p-2"> <button type="button" class="btn btn-primary" (click)="openEmpCreateModal()">Add</button>
-                        </div>
+                <div class="d-flex flex-row-reverse">
+                    <div class="p-3">
+                        <button type="button" class="btn btn-primary" (click)="openEmpCreateModal()"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                            Add Employee</button>
                     </div>
+                    <div class="d-inline-flex p-2">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" name="searchText" placeholder="&#xF002; Search by email" [(ngModel)]="searchText" aria-label="Search">
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body table-responsive">
                     <table class="card-body table table-hover">
                         <thead>
                             <tr>
@@ -34,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let employee of employeeList; index as i">
+                            <tr *ngFor="let employee of employeeList | emailSearchFilter : searchText; let i = index;">
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{employee.empFName}}</td>
                                 <td>{{employee.empLName}}</td>
