@@ -51,9 +51,9 @@
             <label>Status Start Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusStartDate" [(ngModel)]="employeeEntry.statusStartDate" [ngClass]="{ 'is-invalid': submitted && efb.statusStartDate.errors }" name="statusStartDate"
-                      ngbDatepicker #statusStartDate="ngbDatepicker">
-                    <button class="input-group-addon" (click)="statusStartDate.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusStartDate" [(ngModel)]="employeeEntry.statusStartDate" [ngClass]="{ 'is-invalid': submitted && efb.statusStartDate.errors }" name="dp1" ngbDatepicker
+                      #dp1="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dp1.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -67,9 +67,8 @@
             <label>Status End Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusEndDate" [(ngModel)]="employeeEntry.statusEndDate" [ngClass]="{ 'is-invalid': submitted && efb.statusEndDate.errors }" name="statusEndDate" ngbDatepicker
-                      #statusEndDate="ngbDatepicker">
-                    <button class="input-group-addon" (click)="statusEndDate.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="statusEndDate" [(ngModel)]="employeeEntry.statusEndDate" [ngClass]="{ 'is-invalid': submitted && efb.statusEndDate.errors }" name="dp2" ngbDatepicker #dp2="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dp2.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -83,9 +82,9 @@
             <label>Project Start Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectStartDate" [(ngModel)]="employeeEntry.projectStartDate" [ngClass]="{ 'is-invalid': submitted && efb.projectStartDate.errors }" name="projectStartDate"
-                      ngbDatepicker #projectStartDate="ngbDatepicker">
-                    <button class="input-group-addon" (click)="projectStartDate.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectStartDate" [(ngModel)]="employeeEntry.projectStartDate" [ngClass]="{ 'is-invalid': submitted && efb.projectStartDate.errors }" name="dp3" ngbDatepicker
+                      #dp3="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dp3.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -99,9 +98,8 @@
             <label>Project End Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectEndDate" [(ngModel)]="employeeEntry.projectEndDate" [ngClass]="{ 'is-invalid': submitted && efb.projectEndDate.errors }" name="projectEndDate"
-                      ngbDatepicker #projectEndDate="ngbDatepicker">
-                    <button class="input-group-addon" (click)="projectEndDate.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="projectEndDate" [(ngModel)]="employeeEntry.projectEndDate" [ngClass]="{ 'is-invalid': submitted && efb.projectEndDate.errors }" name="dp4" ngbDatepicker #dp4="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dp4.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -115,9 +113,8 @@
             <label>Employee Start Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empStartDate" [(ngModel)]="employeeEntry.empStartDate" [ngClass]="{ 'is-invalid': submitted && efb.empStartDate.errors }" name="empStartDate" ngbDatepicker
-                      #empStartDate="ngbDatepicker">
-                    <button class="input-group-addon" (click)="empStartDate.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empStartDate" [(ngModel)]="employeeEntry.empStartDate" [ngClass]="{ 'is-invalid': submitted && efb.empStartDate.errors }" name="dp5" ngbDatepicker #dp5="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dp5.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>
@@ -131,8 +128,8 @@
             <label>Employee End Date:</label>
             <div class="form-group">
                 <div class="input-group datepicker-input">
-                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empEndDate" [(ngModel)]="employeeEntry.empEndDate" [ngClass]="{ 'is-invalid': submitted && efb.empEndDate.errors }" name="empEndDate" ngbDatepicker #empEndDate="ngbDatepicker">
-                    <button class="input-group-addon" (click)="empEndDate.toggle()" type="button">
+                    <input class="form-control" placeholder="yyyy-mm-dd" formControlName="empEndDate" [(ngModel)]="employeeEntry.empEndDate" [ngClass]="{ 'is-invalid': submitted && efb.empEndDate.errors }" name="dp6" ngbDatepicker #dp6="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dp6.toggle()" type="button">
                         <span class="fa fa-calendar"></span>
                     </button>
                 </div>

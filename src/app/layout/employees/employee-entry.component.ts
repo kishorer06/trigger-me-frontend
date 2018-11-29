@@ -38,6 +38,9 @@ export class EmployeeEntryComponent implements OnInit {
             modalRef.close();
             this.getEmployees();
         }, (_err: HttpErrorResponse) => {
+            modalRef.close();
+            const modalErrorRef = this.ngModal.open(ErrorModalComponent);
+            modalErrorRef.componentInstance.message = `Oops! duplicate record exist!. Please check inputs and try again.`;
         });
     }
 
@@ -117,6 +120,13 @@ export class EmployeeEntryComponent implements OnInit {
         modalRef.componentInstance.title = 'Create Employee';
         modalRef.componentInstance.id = 10;
         modalRef.componentInstance.passEmployeeCreate.subscribe((createEmpRecord) => {
+            createEmpRecord.isEmpEVerifyStatus = (createEmpRecord.isEmpEVerifyStatus === 'true') ? true : false;
+            createEmpRecord.statusStartDate = this.utilsService.formatDate(createEmpRecord.statusStartDate);
+            createEmpRecord.statusEndDate = this.utilsService.formatDate(createEmpRecord.statusEndDate);
+            createEmpRecord.projectStartDate = this.utilsService.formatDate(createEmpRecord.projectStartDate);
+            createEmpRecord.projectEndDate = this.utilsService.formatDate(createEmpRecord.projectEndDate);
+            createEmpRecord.empStartDate = this.utilsService.formatDate(createEmpRecord.empStartDate);
+            createEmpRecord.empEndDate = this.utilsService.formatDate(createEmpRecord.empEndDate);
             this.empEntry(createEmpRecord, modalRef);
         })
     }

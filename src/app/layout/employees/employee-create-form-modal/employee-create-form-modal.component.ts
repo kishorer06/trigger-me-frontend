@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Employee } from '../../../model';
-import { UtilsService } from '../../../shared/services/utils.service';
 
 @Component({
     selector: 'app-employee-create-form-modal',
@@ -18,8 +17,7 @@ export class EmployeeCreateFormModalComponent implements OnInit {
     employeeEntry: Employee = new Employee();
     submitted = false;
     constructor(public activeModal: NgbActiveModal,
-        private fb: FormBuilder,
-        private utilsService: UtilsService) { }
+        private fb: FormBuilder) { }
 
     ngOnInit() {
         this.employeeEntryForm = this.fb.group({
@@ -49,13 +47,7 @@ export class EmployeeCreateFormModalComponent implements OnInit {
     passbackEmployeeCreateModel() {
         this.submitted = true;
         if (this.employeeEntryForm.valid) {
-            this.employeeEntry.isEmpEVerifyStatus = (this.employeeEntryForm.controls.isEmpEVerifyStatus.value === 'true') ? true : false;
-            this.employeeEntry.statusStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.statusStartDate.value);
-            this.employeeEntry.statusEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.statusEndDate.value);
-            this.employeeEntry.projectStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.projectStartDate.value);
-            this.employeeEntry.projectEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.projectEndDate.value);
-            this.employeeEntry.empStartDate = this.utilsService.formatDate(this.employeeEntryForm.controls.empStartDate.value);
-            this.employeeEntry.empEndDate = this.utilsService.formatDate(this.employeeEntryForm.controls.empEndDate.value);
+            this.submitted = false;
             this.passEmployeeCreate.emit(this.employeeEntry);
         }
     }
