@@ -9,6 +9,7 @@ import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/emplo
 import { ErrorModalComponent } from '../../modals/error-modal/error-modal.component';
 import { UtilsService } from '../../shared/services/utils.service';
 import { EmployeeCreateFormModalComponent } from './employee-create-form-modal/employee-create-form-modal.component';
+import { InactiveEmployeesEmailFormComponent } from './inactive-employees-email-form/inactive-employees-email-form.component';
 
 
 @Component({
@@ -24,7 +25,6 @@ export class EmployeeEntryComponent implements OnInit {
         private ngModal: NgbModal,
         private utilsService: UtilsService) { }
     employeeList;
-    title: string;
     closeResult: string;
     submitted = false;
     isSpinner = true;
@@ -83,7 +83,6 @@ export class EmployeeEntryComponent implements OnInit {
     }
 
     empEditOpen(_empl) {
-        this.title = "Edit Employee Profile";
         const modalRef = this.ngModal.open(EmployeeEditFormModalComponent);
         modalRef.componentInstance.title = 'Edit Employee';
         modalRef.componentInstance.id = 10;
@@ -101,7 +100,6 @@ export class EmployeeEntryComponent implements OnInit {
     }
 
     empDeleteOpen(_empl) {
-        this.title = "Employee Profile Delete";
         const modalRef = this.ngModal.open(InformationModalComponent);
         modalRef.componentInstance.title = 'Delete Employee';
         modalRef.componentInstance.message = `Are you sure you want to delete ${_empl.email} profile. All information associated to this user profile will be permanently deleted.This operation can not be undone.`;
@@ -115,10 +113,9 @@ export class EmployeeEntryComponent implements OnInit {
     }
 
     openEmpCreateModal() {
-        this.title = "Create Employee Profile";
         const modalRef = this.ngModal.open(EmployeeCreateFormModalComponent);
         modalRef.componentInstance.title = 'Create Employee';
-        modalRef.componentInstance.id = 10;
+        modalRef.componentInstance.id = 11;
         modalRef.componentInstance.passEmployeeCreate.subscribe((createEmpRecord) => {
             createEmpRecord.isEmpEVerifyStatus = (createEmpRecord.isEmpEVerifyStatus === 'true') ? true : false;
             createEmpRecord.statusStartDate = this.utilsService.formatDate(createEmpRecord.statusStartDate);
@@ -131,6 +128,23 @@ export class EmployeeEntryComponent implements OnInit {
         })
     }
 
+    emailInactivEmp() {
+        const modalRef = this.ngModal.open(InactiveEmployeesEmailFormComponent);
+        modalRef.componentInstance.title = 'New Email';
+        modalRef.componentInstance.id = 12;
+        modalRef.componentInstance.passBackInactiveEmpsEmailEmit.subscribe((emailForm) => {
+            emailForm.priority = (emailForm.priority) ? 1 : 0;
+            modalRef.close();
+            this.emplService.emailInactiveEmpsService(emailForm).subscribe(res => {
+                const modalRef = this.ngModal.open(SuccessModalComponent);
+                modalRef.componentInstance.message = `Email successfully sent.`;
+            }, (_err: HttpErrorResponse) => {
+                const modalRef = this.ngModal.open(ErrorModalComponent);
+                modalRef.componentInstance.message = `Unable to send email. Please try again!`;
+            });
+        });
+
+    }
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';

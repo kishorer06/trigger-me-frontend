@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.authService.logIn(this.user)
             .subscribe(_data => {
                 this.isLoading = false;
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/home']);
             }, _err => {
                 this.isLoading = false;
                 if (_err.status == 401)

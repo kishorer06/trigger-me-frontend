@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="emailForm">
+        <fieldset class="form-group">
+            <label>To:</label>
+            <input type="email" class="form-control" placeholder="abc@xyz.com" [(ngModel)]="emailModel.toEmailAddr" [ngClass]="{ 'is-invalid': submitted && eif.toAddress.errors }" name="toAddress" formControlName="toAddress" required>
+            <div *ngIf="submitted && eif.toAddress.errors">
+                <div *ngIf="eif.toAddress.errors.required" class="alert alert-danger">Recipient email is required</div>
+                <div *ngIf="eif.toAddress.errors.email" class="alert alert-danger">Invalid Email</div>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label>Subject:</label>
+            <input type="text" class="form-control" placeholder="Please add subject here..." [(ngModel)]="emailModel.subject" [ngClass]="{ 'is-invalid': submitted && eif.subject.errors }" name="subject" formControlName="subject" required>
+            <div *ngIf="submitted && eif.subject.errors">
+                <div *ngIf="eif.subject.errors.required" class="alert alert-danger">Subject is required</div>
+                <div *ngIf="eif.subject.errors.minlength" class="alert alert-danger">Subject should have atleast 6 characters</div>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label>Message:</label>
+            <textarea class="form-control" id="message" placeholder="Hello!" max-length="50" rows="3" [(ngModel)]="emailModel.message" [ngClass]="{ 'is-invalid': submitted && eif.message.errors }" name="message" formControlName="message" required></textarea>
+            <div *ngIf="submitted && eif.message.errors">
+                <div *ngIf="eif.message.errors.required" class="alert alert-danger">Message is required</div>
+                <div *ngIf="eif.message.errors.minlength" class="alert alert-danger">Message should have atleast 15 characters</div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <label>Priority:</label>
+            <br>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="emailModel.priority" [ngClass]="{ 'is-invalid': submitted && eif.priority.errors }" name="priority" formControlName="priority" required>
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="true"> Yes
+                </label>
+                <label ngbButtonLabel class="btn-primary">
+                    <input ngbButton type="radio" [value]="false"> No
+                </label>
+            </div>
+            <div *ngIf="submitted && eif.priority.errors">
+                <div *ngIf="eif.priority.errors.required" class="alert alert-danger">Priority is required</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-secondary" (click)="passBackInactiveEmpsEmailForm()">Submit</button> &nbsp;
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close')">Close</button>
+</div>

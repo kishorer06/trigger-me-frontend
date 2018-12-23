@@ -7,5 +7,6 @@ export const ApiConstants = {
     register: 'tm/register',
     saveEmployee: 'tm/saveEmployee',
     token: 'tm/token',
-    updateEmployee: 'tm/updateEmployee'
+    updateEmployee: 'tm/updateEmployee',
+    sendEmpInactiveRecordsNotification: 'tm/sendEmpInactiveRecordsNotification'
 };

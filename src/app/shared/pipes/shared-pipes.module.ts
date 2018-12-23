@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EmployeeSearchFilter } from './employee-filter/emp-search-filter.pipe';
 
-import { FilterPipe } from './filter.pipe';
 
 @NgModule({
     imports: [
         CommonModule
     ],
-    declarations: [FilterPipe],
-    exports: [FilterPipe]
+    declarations: [EmployeeSearchFilter],
+    exports: [EmployeeSearchFilter]
 })
 export class SharedPipesModule { }

@@ -15,6 +15,7 @@ import { EmployeeEntryService } from './layout/employees/employee-entry.service'
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import { ErrorModalComponent } from './modals/error-modal/error-modal.component';
 import { InformationModalComponent } from './modals/information-modal/information-modal.component';
+import { NgbModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -37,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         HttpClientModule,
         HttpModule,
+        NgbModule.forRoot(),
         AppRoutingModule
     ],
     declarations: [AppComponent, SuccessModalComponent, ErrorModalComponent, InformationModalComponent],

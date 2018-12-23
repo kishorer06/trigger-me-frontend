@@ -13,7 +13,7 @@
                         <input type="password" class="form-control input-underline input-lg" [(ngModel)]="user.password" name="password" formControlName="password" id="password" placeholder="Password" required>
                     </div>
                 </div>
-                <button class="btn rounded-btn" [routerLink]="['/dashboard']" [disabled]="!loginForm.valid || isLoading" (click)="login()"> Log in </button> &nbsp;
+                <button class="btn rounded-btn" [disabled]="!loginForm.valid || isLoading" (click)="login()"> Log in </button> &nbsp;
                 <!-- <button class="btn rounded-btn" [routerLink]="['/signup']">Register</button> -->
             </form>
             <span>

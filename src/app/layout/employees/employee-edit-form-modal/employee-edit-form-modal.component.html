@@ -39,12 +39,16 @@
             </div>
         </fieldset>
         <fieldset class="form-group">
-            <label>Status:</label>
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Status</label>
+            <select class="custom-select mr-sm-2" (change)="onSelect($event.target.value)" [(ngModel)]="selectedOptId" id="inlineFormCustomSelect" [ngModelOptions]="{standalone: true}" required>
+                <option *ngFor="let option of statusOptions" value="{{option.id}}">{{option.status}}</option>
+            </select>
+            <!-- <label>Status:</label>
             <input type="text" class="form-control" placeholder="H1/L1/OPT..." [ngClass]="{ 'is-invalid': submitted && efb.status.errors }" name="status" formControlName="status" required>
             <div *ngIf="submitted && efb.status.errors">
                 <div *ngIf="efb.status.errors.required" class="alert alert-danger">Status is required</div>
                 <div *ngIf="efb.status.errors.minlength" class="alert alert-danger">Status should have atleast 3 characters</div>
-            </div>
+            </div> -->
         </fieldset>
         <fieldset class="form-group">
             <label>Status Start Date:</label>

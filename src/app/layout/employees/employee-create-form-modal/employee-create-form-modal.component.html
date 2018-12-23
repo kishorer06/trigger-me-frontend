@@ -40,12 +40,20 @@
             </div>
         </fieldset>
         <fieldset class="form-group">
-            <label>Status:</label>
-            <input type="text" class="form-control" placeholder="H1/L1/OPT..." [(ngModel)]="employeeEntry.status" [ngClass]="{ 'is-invalid': submitted && efb.status.errors }" name="status" formControlName="status" required>
-            <div *ngIf="submitted && efb.status.errors">
+            <!-- <label>Status:</label> -->
+
+            <!-- <div class="col-auto my-1"> -->
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Status</label>
+            <select class="custom-select mr-sm-2" (change)="onSelect($event.target.value)" [(ngModel)]="selectedOptId" name="status" id="inlineFormCustomSelect" [ngModelOptions]="{standalone: true}" required>
+                <option *ngFor="let option of statusOptions" value="{{option.id}}">{{option.status}}</option>
+            </select>
+            <!-- </div> -->
+
+            <!-- <input type="text" class="form-control" placeholder="H1/L1/OPT..." [(ngModel)]="employeeEntry.status" [ngClass]="{ 'is-invalid': submitted && efb.status.errors }" name="status" formControlName="status" required> -->
+            <!-- <div *ngIf="submitted && efb.status.errors">
                 <div *ngIf="efb.status.errors.required" class="alert alert-danger">Status is required</div>
                 <div *ngIf="efb.status.errors.minlength" class="alert alert-danger">Status should have atleast 3 characters</div>
-            </div>
+            </div> -->
         </fieldset>
         <fieldset class="form-group">
             <label>Status Start Date:</label>

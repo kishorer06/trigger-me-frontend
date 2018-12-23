@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EmployeeEntryService } from '../employees/employee-entry.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InactiveEmployeesModalComponent } from './inactive-employees-modal/inactive-employees-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -12,10 +15,13 @@ import { EmployeeEntryService } from '../employees/employee-entry.service';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    totalEmployees = 0;
-    totalInactiveEmployees = 0;
+    totalEmployeesLength = 0;
+    totalInactiveEmployeesLength = 0;
+    inactiveEmployees;
+    employeeWord: string;
+    employeeInactiveWord: string;
 
-    constructor(private empService: EmployeeEntryService) {
+    constructor(private empService: EmployeeEntryService, private ngModal: NgbModal, public router: Router) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -63,16 +69,36 @@ export class DashboardComponent implements OnInit {
 
     getTotalEmployees() {
         this.empService.getEmployeesService().subscribe((res: any) => {
-            this.totalEmployees = res.length;
+            if (res.length > 1)
+                this.employeeWord = 'Employees';
+            else
+                this.employeeWord = 'Employee';
+            this.totalEmployeesLength = res.length;
         }, (_err: HttpErrorResponse) => {
         });
     }
 
     getInactiveEmployees() {
         this.empService.getInactiveEmployeesService().subscribe((res: any) => {
-            this.totalInactiveEmployees = res.length;
+            if (res.length > 1)
+                this.employeeInactiveWord = 'Inactive employees';
+            else
+                this.employeeInactiveWord = 'Inactive employee';
+            this.totalInactiveEmployeesLength = res.length;
+            this.inactiveEmployees = res;
         }, (_err: HttpErrorResponse) => {
         });
+    }
+
+    openInactiveEmplModal() {
+        const modalRef = this.ngModal.open(InactiveEmployeesModalComponent);
+        modalRef.componentInstance.title = 'Inactive Employees';
+        modalRef.componentInstance.id = 13;
+        modalRef.componentInstance.inactiveEmployeeModal = this.inactiveEmployees;
+    }
+
+    goToEmplTable() {
+        this.router.navigate(['/employee']);
     }
 
     public closeAlert(alert: any) {

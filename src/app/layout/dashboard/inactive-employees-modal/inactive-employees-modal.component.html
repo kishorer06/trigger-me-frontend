@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div *ngIf="inactiveEmployeeModal.length > 0" class="card-body table-responsive">
+        <table class="card-body table table-hover">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of inactiveEmployeeModal; let i = index;">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{employee.empFName}}</td>
+                    <td>{{employee.empLName}}</td>
+                    <td>{{employee.phoneNumber}}</td>
+                    <td>{{employee.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="inactiveEmployeeModal.length == 0">
+        <p align="center" class="empty-records"> Wow! you do not have any inactive employee records.</p>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close')">Close</button>
+</div>

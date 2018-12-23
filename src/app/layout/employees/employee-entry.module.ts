@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeEditFormModalComponent } from './employee-edit-form-modal/employee-edit-form-modal.component';
 import { EmployeeCreateFormModalComponent } from './employee-create-form-modal/employee-create-form-modal.component';
+import { InactiveEmployeesEmailFormComponent } from './inactive-employees-email-form/inactive-employees-email-form.component';
 
 @NgModule({
     imports: [
@@ -27,11 +28,13 @@ import { EmployeeCreateFormModalComponent } from './employee-create-form-modal/e
     declarations: [
         EmployeeEntryComponent,
         EmployeeEditFormModalComponent,
-        EmployeeCreateFormModalComponent
+        EmployeeCreateFormModalComponent,
+        InactiveEmployeesEmailFormComponent
     ],
     entryComponents: [
         EmployeeEditFormModalComponent,
-        EmployeeCreateFormModalComponent
+        EmployeeCreateFormModalComponent,
+        InactiveEmployeesEmailFormComponent
     ]
 })
 export class EmployeeEntryModule { }

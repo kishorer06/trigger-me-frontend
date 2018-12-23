@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Employee } from '../../../model';
+import { Employee, EmployeeStatus } from '../../../model';
 import { UtilsService } from '../../../shared/services/utils.service';
 
 @Component({
@@ -15,7 +15,14 @@ export class EmployeeEditFormModalComponent implements OnInit {
     @Input() public employeeEdit;
     @Output() passEmployeeEdit: EventEmitter<any> = new EventEmitter();
     submitted = false;
+    selectedOptId: number;
+    selectedStatus;
     employeeEditModel: Employee = new Employee();
+    statusOptions = [
+        new EmployeeStatus(1, 'F1'),
+        new EmployeeStatus(2, 'H1-B'),
+        new EmployeeStatus(3, 'E-3')
+    ];
     constructor(
         public activeModal: NgbActiveModal,
         private formBuilder: FormBuilder,
@@ -25,12 +32,13 @@ export class EmployeeEditFormModalComponent implements OnInit {
 
     employeeEditForm: FormGroup;
     ngOnInit() {
+        // this.selectedStatus = new EmployeeStatus(this.employeeEdit.status);
         this.employeeEditForm = this.formBuilder.group({
             empFName: [this.employeeEdit.empFName, [Validators.required, Validators.minLength(2)]],
             empLName: [this.employeeEdit.empLName, [Validators.required, Validators.minLength(2)]],
             phoneNumber: [this.employeeEdit.phoneNumber, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
             email: [this.employeeEdit.email, [Validators.required, Validators.email]],
-            status: [this.employeeEdit.status, [Validators.required, Validators.minLength(3)]],
+            // status: [this.employeeEdit.status, [Validators.required, Validators.minLength(3)]],
             statusStartDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.statusStartDate), [Validators.required]],
             statusEndDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.statusEndDate), [Validators.required]],
             projectStartDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.projectStartDate), [Validators.required]],
@@ -39,9 +47,32 @@ export class EmployeeEditFormModalComponent implements OnInit {
             empEndDate: [this.utilsService.formatDateToDatePicker(this.employeeEdit.empEndDate), [Validators.required]],
             empEVerifyStatus: [this.employeeEdit.empEVerifyStatus, [Validators.required]]
         })
+
+        this.setSelectOption(this.employeeEdit.status);
     }
 
     get efb() { return this.employeeEditForm.controls; }
+
+    onSelect(statusId) {
+        this.selectedStatus = null;
+        for (var i = 0; i < this.statusOptions.length; i++) {
+            if (this.statusOptions[i].id === Number(statusId)) {
+                this.selectedOptId = this.statusOptions[i].id;
+                this.selectedStatus = this.statusOptions[i].status;
+            }
+        }
+    }
+
+    setSelectOption(status) {
+        this.selectedStatus = null;
+        for (var i = 0; i < this.statusOptions.length; i++) {
+            if (this.statusOptions[i].status == status) {
+                this.selectedOptId = this.statusOptions[i].id;
+                this.selectedStatus = this.statusOptions[i].status;
+            }
+        }
+
+    }
 
     passBackEmployeeEditForm() {
         this.submitted = true;
@@ -51,7 +82,7 @@ export class EmployeeEditFormModalComponent implements OnInit {
             this.employeeEditModel.empLName = this.employeeEditForm.controls.empLName.value;
             this.employeeEditModel.phoneNumber = this.employeeEditForm.controls.phoneNumber.value;
             this.employeeEditModel.email = this.employeeEditForm.controls.email.value;
-            this.employeeEditModel.status = this.employeeEditForm.controls.status.value;
+            this.employeeEditModel.status = this.selectedStatus;
             this.employeeEditModel.statusStartDate = this.employeeEditForm.controls.statusStartDate.value;
             this.employeeEditModel.statusEndDate = this.employeeEditForm.controls.statusEndDate.value;
             this.employeeEditModel.projectStartDate = this.employeeEditForm.controls.projectStartDate.value;
