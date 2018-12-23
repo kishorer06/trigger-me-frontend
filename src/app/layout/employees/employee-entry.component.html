@@ -35,31 +35,31 @@
                                 <th>Last Name</th>
                                 <th>Phone Number</th>
                                 <th>Email</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                                 <!-- <th>Status Start/End Date</th>
                                 <th>Project Start/End Date</th>
                                 <th>Employee Start/End Date</th> -->
-                                <th>E-verify Status</th>
+                                <!-- <th>E-verify Status</th> -->
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let employee of employeeList | emailSearchFilter : searchText; let i = index;">
+                            <tr *ngFor="let employee of employeeList  | slice: pageSize | slice: 0:itemsPerPage | emailSearchFilter : searchText; let i = index;">
                                 <th scope="row">{{i+1}}</th>
                                 <td>{{employee.empFName}}</td>
                                 <td>{{employee.empLName}}</td>
                                 <td>{{employee.phoneNumber}}</td>
                                 <td>{{employee.email}}</td>
-                                <td>{{employee.status}}</td>
+                                <!-- <td>{{employee.status}}</td> -->
                                 <!-- <td>{{employee.statusStartDate | date}}/{{employee.statusEndDate | date}}</td>
                                 <td>{{employee.projectStartDate | date}}/{{employee.projectEndDate | date}}</td>
                                 <td>{{employee.empStartDate | date}}/{{employee.empEndDate | date}}</td> -->
-                                <td *ngIf="employee.empEVerifyStatus"> yes
+                                <!-- <td *ngIf="employee.empEVerifyStatus"> yes
                                 </td>
                                 <td *ngIf="!employee.empEVerifyStatus">
                                     <span style="color:red;">No</span>
-                                </td>
+                                </td> -->
                                 <td class="row-edit" id="emp-row-edit" (click)="empEditOpen(employee)"><i class=" fa fa-edit"></i></td>
                                 <td class="row-delete" id="emp-row-delete" (click)="empDeleteOpen(employee)"><i class="fa fa-trash"></i></td>
                             </tr>
@@ -70,6 +70,9 @@
                     <div class="p-3">
                         <button type="button" class="btn btn-primary" (click)="emailInactivEmp()"><i class="fa fa-envelope" aria-hidden="true"></i>
                             Inactive Employees</button>
+                    </div>
+                    <div class="p-3">
+                        <ngb-pagination *ngIf="employeeLength > 10" [collectionSize]="employeeLength" [pageSize]="itemsPerPage" [(page)]="page" aria-label="Default pagination" (pageChange)="onPageChange(page)"></ngb-pagination>
                     </div>
                 </div>
 

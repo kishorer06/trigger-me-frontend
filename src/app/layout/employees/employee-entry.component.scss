@@ -9,10 +9,11 @@
 .row-delete:hover{
 color: red;
 }
-.card-body {
-max-height: 600px !important;
-     overflow-y:scroll;
-  }
+// Add scroll bar if table exceeds 10 records
+// .card-body {
+// max-height: 600px !important;
+//      overflow-y:scroll;
+//   }
 
 input.mr-sm-2{
   font-family: Arial, FontAwesome;

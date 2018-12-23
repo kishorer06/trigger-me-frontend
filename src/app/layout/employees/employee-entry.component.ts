@@ -25,9 +25,13 @@ export class EmployeeEntryComponent implements OnInit {
         private ngModal: NgbModal,
         private utilsService: UtilsService) { }
     employeeList;
+    employeeLength;
     closeResult: string;
-    submitted = false;
-    isSpinner = true;
+    submitted: boolean = false;
+    isSpinner: boolean = true;
+    page: number = 1;
+    itemsPerPage: number = 10;
+    pageSize: number;
     public searchText: any;
     ngOnInit() {
         this.getEmployees();
@@ -49,6 +53,7 @@ export class EmployeeEntryComponent implements OnInit {
         this.emplService.getEmployeesService().subscribe(res => {
             this.isSpinner = false;
             this.employeeList = res;
+            this.employeeLength = this.employeeList.length;
             if (!(this.employeeList.length >= 1))
                 this.emptyEmpRecords = true;
         }, (_err: HttpErrorResponse) => {
@@ -145,6 +150,11 @@ export class EmployeeEntryComponent implements OnInit {
         });
 
     }
+
+    public onPageChange(pageNum: number): void {
+        this.pageSize = this.itemsPerPage * (pageNum - 1);
+    }
+
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';

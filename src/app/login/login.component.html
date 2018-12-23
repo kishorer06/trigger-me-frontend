@@ -7,10 +7,10 @@
                 <div class="form-content">
                     <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
                     <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" [(ngModel)]="user.username" name="username" formControlName="username" id="email" placeholder="Email" required>
+                        <input type="text" [readonly]="isLoading" class="form-control input-underline input-lg" [(ngModel)]="user.username" name="username" formControlName="username" id="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" [(ngModel)]="user.password" name="password" formControlName="password" id="password" placeholder="Password" required>
+                        <input type="password" [readonly]="isLoading" class="form-control input-underline input-lg" [(ngModel)]="user.password" name="password" formControlName="password" id="password" placeholder="Password" required>
                     </div>
                 </div>
                 <button class="btn rounded-btn" [disabled]="!loginForm.valid || isLoading" (click)="login()"> Log in </button> &nbsp;
