@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
     }
 
     openInactiveEmplModal() {
-        const modalRef = this.ngModal.open(InactiveEmployeesModalComponent);
+        const modalRef = this.ngModal.open(InactiveEmployeesModalComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.title = 'Inactive Employees';
         modalRef.componentInstance.id = 13;
         modalRef.componentInstance.inactiveEmployeeModal = this.inactiveEmployees;

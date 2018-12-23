@@ -24,7 +24,7 @@
         </fieldset>
         <fieldset class="form-group">
             <label>Phone Number:</label>
-            <input type="tel" class="form-control" placeholder="1234567890" maxlength="12" [(ngModel)]="employeeEntry.phoneNumber" [ngClass]="{ 'is-invalid': submitted && efb.phoneNumber.errors }" name="phoneNumber" formControlName="phoneNumber"
+            <input type="tel" class="form-control" placeholder="+11234567890" maxlength="12" [(ngModel)]="employeeEntry.phoneNumber" [ngClass]="{ 'is-invalid': submitted && efb.phoneNumber.errors }" name="phoneNumber" formControlName="phoneNumber"
               required>
             <div *ngIf="submitted && efb.phoneNumber.errors">
                 <div *ngIf="efb.phoneNumber.errors.required" class="alert alert-danger">Phone Number is required</div>

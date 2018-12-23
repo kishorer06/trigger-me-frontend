@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let employee of inactiveEmployeeModal; let i = index;">
+                <tr *ngFor="let employee of inactiveEmployeeModal | slice: pageSize | slice: 0:itemsPerPage; let i = index;">
                     <th scope="row">{{i+1}}</th>
                     <td>{{employee.empFName}}</td>
                     <td>{{employee.empLName}}</td>
@@ -30,6 +30,12 @@
     <div *ngIf="inactiveEmployeeModal.length == 0">
         <p align="center" class="empty-records"> Wow! you do not have any inactive employee records.</p>
     </div>
+    <div class="row" *ngIf="inactiveEmployeeModal.length > 10">
+        <div class="col-centered">
+            <ngb-pagination [collectionSize]="inactiveEmployeeModal.length" [pageSize]="itemsPerPage" [(page)]="page" aria-label="Default pagination" (pageChange)="onPageChange(page)"></ngb-pagination>
+        </div>
+    </div>
+
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close')">Close</button>

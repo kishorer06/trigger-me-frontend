@@ -12,7 +12,15 @@ export class InactiveEmployeesModalComponent implements OnInit {
     @Input() title: string;
     @Input() id: number;
     @Input() public inactiveEmployeeModal;
+    page: number = 1;
+    itemsPerPage: number = 10;
+    pageSize: number;
     ngOnInit() {
     }
+
+    public onPageChange(pageNum: number): void {
+        this.pageSize = this.itemsPerPage * (pageNum - 1);
+    }
+
 
 }
